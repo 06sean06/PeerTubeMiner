@@ -9,6 +9,11 @@ public class PeerTubeApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PeerTubeApplication.class, args);
 	}
-	//hellow world
+	
+	// ¿No haría falta este método?
+	@Bean
+	public RestTemplate restTemplate(RestTemplateBuilder builder) {
+		return builder.build();
+	}
 
 }
