@@ -1,5 +1,5 @@
-
-package aiss.PeerTube.model.caption;
+// Falta cambiarle el nombre a todo -> PT
+package aiss.PeerTube.modelPT.video;
 
 import javax.annotation.processing.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -12,20 +12,20 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "label"
 })
 @Generated("jsonschema2pojo")
-public class LanguagePT {
+public class Category {
 
     @JsonProperty("id")
-    private String id;
+    private Integer id;
     @JsonProperty("label")
     private String label;
 
     @JsonProperty("id")
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
     @JsonProperty("id")
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -42,7 +42,7 @@ public class LanguagePT {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(LanguagePT.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(Category.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("id");
         sb.append('=');
         sb.append(((this.id == null)?"<null>":this.id));

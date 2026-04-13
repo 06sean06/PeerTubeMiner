@@ -1,5 +1,5 @@
 
-package aiss.PeerTube.model.channel;
+package aiss.PeerTube.modelPT.channel;
 
 import javax.annotation.processing.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;

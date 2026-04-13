@@ -1,5 +1,5 @@
 
-package aiss.PeerTube.model.caption;
+package aiss.PeerTube.modelPT.caption;
 
 import javax.annotation.processing.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;

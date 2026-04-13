@@ -1,5 +1,5 @@
 
-package aiss.PeerTube.model.video;
+package aiss.PeerTube.modelPT.video;
 
 import javax.annotation.processing.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -12,20 +12,20 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "label"
 })
 @Generated("jsonschema2pojo")
-public class Privacy {
+public class Licence {
 
     @JsonProperty("id")
-    private Integer id;
+    private Object id;
     @JsonProperty("label")
     private String label;
 
     @JsonProperty("id")
-    public Integer getId() {
+    public Object getId() {
         return id;
     }
 
     @JsonProperty("id")
-    public void setId(Integer id) {
+    public void setId(Object id) {
         this.id = id;
     }
 
@@ -42,7 +42,7 @@ public class Privacy {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Privacy.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(Licence.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("id");
         sb.append('=');
         sb.append(((this.id == null)?"<null>":this.id));

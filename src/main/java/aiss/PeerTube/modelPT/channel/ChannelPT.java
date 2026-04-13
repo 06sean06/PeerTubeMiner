@@ -1,5 +1,5 @@
 
-package aiss.PeerTube.model.channel;
+package aiss.PeerTube.modelPT.channel;
 
 import java.util.List;
 import javax.annotation.processing.Generated;

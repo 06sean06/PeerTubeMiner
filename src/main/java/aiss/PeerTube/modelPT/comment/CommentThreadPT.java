@@ -1,5 +1,5 @@
 
-package aiss.PeerTube.model.comment;
+package aiss.PeerTube.modelPT.comment;
 
 import java.util.List;
 import javax.annotation.processing.Generated;

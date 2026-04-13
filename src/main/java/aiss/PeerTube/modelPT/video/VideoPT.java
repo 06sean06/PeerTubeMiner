@@ -1,5 +1,5 @@
 
-package aiss.PeerTube.model.video;
+package aiss.PeerTube.modelPT.video;
 
 import java.util.List;
 import javax.annotation.processing.Generated;

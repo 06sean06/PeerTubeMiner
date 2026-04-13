@@ -1,11 +1,13 @@
 
-package aiss.PeerTube.model.channel;
+package aiss.PeerTube.modelPT.comment;
 
 import java.util.List;
 import javax.annotation.processing.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import aiss.PeerTube.model.channel.AvatarPT;
+
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -23,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "updatedAt"
 })
 @Generated("jsonschema2pojo")
-public class OwnerAccountPT {
+public class AccountPT {
 
     @JsonProperty("url")
     private String url;
@@ -46,7 +48,7 @@ public class OwnerAccountPT {
     @JsonProperty("displayName")
     private String displayName;
     @JsonProperty("description")
-    private String description;
+    private Object description;
     @JsonProperty("updatedAt")
     private String updatedAt;
 
@@ -151,12 +153,12 @@ public class OwnerAccountPT {
     }
 
     @JsonProperty("description")
-    public String getDescription() {
+    public Object getDescription() {
         return description;
     }
 
     @JsonProperty("description")
-    public void setDescription(String description) {
+    public void setDescription(Object description) {
         this.description = description;
     }
 
@@ -173,7 +175,7 @@ public class OwnerAccountPT {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(OwnerAccountPT.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(AccountPT.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("url");
         sb.append('=');
         sb.append(((this.url == null)?"<null>":this.url));
