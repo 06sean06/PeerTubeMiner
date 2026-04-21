@@ -14,7 +14,8 @@ public class PeerTubeApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PeerTubeApplication.class, args);
 	}
-@Bean
+	
+	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
 	}}

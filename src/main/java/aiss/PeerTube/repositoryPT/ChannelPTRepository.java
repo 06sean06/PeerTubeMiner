@@ -9,7 +9,7 @@ import aiss.PeerTube.modelPT.channel.ChannelPT;
 import aiss.PeerTube.services.ChannelPTService;
 
 @Repository
-public class ChannelRepository {
+public class ChannelPTRepository {
     @Autowired
     ChannelPTService channelPTService;
 
