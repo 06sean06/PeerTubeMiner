@@ -25,8 +25,13 @@ public class ChannelPTService {
         String uri = url + "/video-channels";
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Void> request = new HttpEntity<>(headers);
+        @SuppressWarnings("null") // Lo he añadido porque VSCode cree que HttpMethod.GET es null, pero no lo es, es un enum.
         ResponseEntity<ChannelPTResponse> response = restTemplate.exchange(uri, HttpMethod.GET, request, ChannelPTResponse.class);
-        return response.getBody().getData();
+        ChannelPTResponse body = response.getBody();
+        if (body == null || body.getData() == null) {
+            return List.of();
+        }
+        return body.getData();
     }
 
     //Obtener un canal en concreto
@@ -35,6 +40,7 @@ public class ChannelPTService {
         String uri = url + "/video-channels/" + channelHandle;
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Void> request = new HttpEntity<>(headers);
+        @SuppressWarnings("null") // Lo he añadido porque VSCode cree que HttpMethod.GET es null, pero no lo es, es un enum.
         ResponseEntity<ChannelPT> response = restTemplate.exchange(uri, HttpMethod.GET, request, ChannelPT.class);
         return response.getBody();
     }
