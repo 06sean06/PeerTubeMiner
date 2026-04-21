@@ -1,4 +1,4 @@
-package aiss.PeerTube.PTController;
+package aiss.PeerTube.controllerPT;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import aiss.PeerTube.PTRepository.ChannelRepository;
 import aiss.PeerTube.modelPT.channel.ChannelPT;
+import aiss.PeerTube.repositoryPT.ChannelRepository;
 
 @RestController
 @RequestMapping("PeerTube/channels")

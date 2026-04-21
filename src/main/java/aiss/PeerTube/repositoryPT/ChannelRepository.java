@@ -1,4 +1,4 @@
-package aiss.PeerTube.PTRepository;
+package aiss.PeerTube.repositoryPT;
 
 import java.util.List;
 
