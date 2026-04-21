@@ -1,6 +1,5 @@
 package aiss.PeerTube.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,12 @@ public class CaptionPTService {
         String uri = url + "/videos/" + idVideo + "/captions";
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Void> request = new HttpEntity<>(headers);
+        @SuppressWarnings("null") // Lo he añadido porque VSCode cree que HttpMethod.GET es null, pero no lo es, es un enum.
         ResponseEntity<CaptionPTResponse> response = restTemplate.exchange(uri, HttpMethod.GET, request, CaptionPTResponse.class);
-        // Puesto que puede que el vídeo no tenga ningún caption, el response puede ser null, por lo que se devuelve una lista vacía.
-        return response.getBody().getData();
+        CaptionPTResponse body = response.getBody();
+        if (body == null || body.getData() == null) {
+            return List.of();
+        }
+        return body.getData();
     }
 }
