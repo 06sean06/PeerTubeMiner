@@ -1,7 +1,6 @@
 package aiss.PeerTube.services;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,28 +13,25 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 import aiss.PeerTube.modelPT.caption.CaptionPT;
+import aiss.PeerTube.modelPT.caption.CaptionPTResponse;
 
 @Service
 public class CaptionPTService {
 
+    // Si no se importa así te da error porque no tienen manera de comunicarse.
     @Autowired
     RestTemplate restTemplate;
 
-    @Value("${peertube.token}")
-    private String token;
+    @Value("${peertube.url}")
+    private String url; //https://peertube3.cpy.re/api/v1
 
-    // Encuentra todos los subtítulos de un video en concreto
     // GET https://peertube3.cpy.re/api/v1/videos/58UdeJ7NayzNSScpTE3YRa/captions
     public List<CaptionPT> findAllCaptionsOfVid(String idVideo) {
-        String uri = "https://peertube3.cpy.re/api/v1/videos/" + idVideo + "/captions";
-        // No es necesario acceder con el token (no tenemos token)
+        String uri = url + "/videos/" + idVideo + "/captions";
         HttpHeaders headers = new HttpHeaders();
-        HttpEntity<CaptionPT[]> request = new HttpEntity<>(null, headers);
-        ResponseEntity<CaptionPT[]> response = restTemplate.exchange(uri, HttpMethod.GET, request, CaptionPT[].class);
-        // Lo pasamos a List<CaptionPT>:
-        List<CaptionPT> allCaptions = new ArrayList<>();
-        allCaptions.addAll(Arrays.asList(response.getBody()));
-        return allCaptions;
+        HttpEntity<Void> request = new HttpEntity<>(headers);
+        ResponseEntity<CaptionPTResponse> response = restTemplate.exchange(uri, HttpMethod.GET, request, CaptionPTResponse.class);
+        // Puesto que puede que el vídeo no tenga ningún caption, el response puede ser null, por lo que se devuelve una lista vacía.
+        return response.getBody().getData();
     }
-
 }
