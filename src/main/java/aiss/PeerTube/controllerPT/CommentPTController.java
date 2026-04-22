@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("PeerTube/comment")
+@RequestMapping("PeerTube/comments")
 public class CommentPTController {
     private CommentPTRepository commentRepository;
 
