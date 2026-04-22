@@ -1,0 +1,28 @@
+package aiss.PeerTube.controllerPT;
+
+import aiss.PeerTube.modelPT.comment.CommentBasePT;
+import aiss.PeerTube.repositoryPT.CommentPTRepository;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("PeerTube/comment")
+public class CommentPTController {
+    private CommentPTRepository commentRepository;
+
+    public CommentPTController(CommentPTRepository commentRepository){
+        this.commentRepository = commentRepository;
+    }
+
+    // GET http://localhost:8080/PeerTube/comments
+    @GetMapping
+    public List<CommentBasePT> getComment(){
+        return commentRepository.findAll();
+    }
+
+    // GET http://localhost:8080/PeerTube/comments/{id}
+    @GetMapping("/{id}")
+    public CommentBasePT getCommentById(@PathVariable Integer id) {
+        return commentRepository.findById(id);
+    }
+}
