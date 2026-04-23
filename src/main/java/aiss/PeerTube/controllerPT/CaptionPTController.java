@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,9 +22,9 @@ public class CaptionPTController {
         this.captionPTRepository = captionPTRepository;
     }
 
-    // GET http://localhost:8080/PeerTube/captions
-    @GetMapping
-    public List<CaptionPT> getCaptions() {
-        return captionPTRepository.findAll();
+    // GET http://localhost:8080/PeerTube/captions/{id}
+    @GetMapping("/{idVideo}")
+    public List<CaptionPT> getCaptions(@PathVariable String idVideo) {
+        return captionPTRepository.findAll(idVideo);
     }
 }

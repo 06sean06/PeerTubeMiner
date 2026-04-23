@@ -34,6 +34,7 @@ public class CommentPTService {
         }
         return body.getData();
     }
+
     // GET https://peertube3.cpy.re/api/v1/videos/{id}/comment-threads/{threadId}
     public CommentBasePT getSpecificComment(String videoId, String threadId) {
         String uri = url + "/videos/" + videoId + "/comment-threads/" + threadId;
@@ -45,6 +46,7 @@ public class CommentPTService {
         
         return response.getBody();
     }
+    
     // GET https://peertube3.cpy.re/api/v1/videos/comments
     public List<CommentBasePT> getAllInstanceComments() {
         String uri = url + "/videos/comments";
