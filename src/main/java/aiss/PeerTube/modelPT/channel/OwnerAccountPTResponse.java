@@ -1,10 +1,8 @@
 package aiss.PeerTube.modelPT.channel;
 
-import java.util.List;
-
-public class ChannelPTResponse {
+public class OwnerAccountPTResponse {
     private Integer total;
-    private List<ChannelPT> data;
+    private OwnerAccountPT[] data;
 
     public Integer getTotal() {
         return total;
@@ -14,12 +12,12 @@ public class ChannelPTResponse {
         this.total = total;
     }
 
-    public List<ChannelPT> getData() {
+    public OwnerAccountPT[] getData() {
         return data;
     }
 
-    public void setData(List<ChannelPT> data) {
+    public void setData(OwnerAccountPT[] data) {
         this.data = data;
     }
-
+    
 }
