@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import aiss.PeerTube.exception.VideoNotFoundException;
 import aiss.PeerTube.modelPT.caption.CaptionPT;
 import aiss.PeerTube.repositoryPT.CaptionPTRepository;
 
@@ -17,6 +18,8 @@ public class CaptionPTController {
 
     private CaptionPTRepository captionPTRepository;
 
+    //private VideoPTRepository videoPTRepository;
+
     @Autowired
     public CaptionPTController (CaptionPTRepository captionPTRepository) {
         this.captionPTRepository = captionPTRepository;
@@ -24,7 +27,7 @@ public class CaptionPTController {
 
     // GET http://localhost:8080/PeerTube/captions/{id}
     @GetMapping("/{idVideo}")
-    public List<CaptionPT> getCaptions(@PathVariable String idVideo) {
+    public List<CaptionPT> getCaptions(@PathVariable String idVideo) throws VideoNotFoundException {
         return captionPTRepository.findAll(idVideo);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import aiss.PeerTube.exception.ChannelNotFoundException;
 import aiss.PeerTube.modelPT.channel.ChannelPT;
 import aiss.PeerTube.repositoryPT.ChannelPTRepository;
 
@@ -26,7 +27,7 @@ public class ChannelPTController {
     }
     // GET http://localhost:8080/PeerTube/channels/{channelHandle}
     @GetMapping("/{channelHandle}")
-    public ChannelPT getChannelById(@PathVariable String channelHandle) {
+    public ChannelPT getChannelById(@PathVariable String channelHandle) throws ChannelNotFoundException{
         return channelRepository.findChannelById(channelHandle);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import aiss.PeerTube.exception.UserNotFoundException;
 import aiss.PeerTube.modelPT.channel.OwnerAccountPT;
 import aiss.PeerTube.repositoryPT.UserPTRepository;
 
@@ -27,7 +28,7 @@ public class UserPTController {
 
     // GET http://localhost:8080/PeerTube/accounts/{userName}
     @GetMapping("/{userName}")
-    public OwnerAccountPT getUserByName(@PathVariable String userName) {
+    public OwnerAccountPT getUserByName(@PathVariable String userName) throws UserNotFoundException {
         return userRepository.findUserByName(userName);
     }
     
