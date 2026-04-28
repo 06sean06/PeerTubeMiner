@@ -1,11 +1,12 @@
 package aiss.PeerTube.services;
 
-import aiss.PeerTube.modelPT.comment.CommentBasePT;
-import aiss.PeerTube.modelPT.comment.CommentThreadPT;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import aiss.PeerTube.model.comment.CommentBasePT;
+import aiss.PeerTube.model.comment.CommentThreadPT;
 
 import java.util.List;
 

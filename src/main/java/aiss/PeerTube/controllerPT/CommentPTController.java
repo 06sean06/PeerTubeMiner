@@ -1,7 +1,7 @@
 package aiss.PeerTube.controllerPT;
 
 import aiss.PeerTube.exception.CommentNotFoundException;
-import aiss.PeerTube.modelPT.comment.CommentBasePT;
+import aiss.PeerTube.model.comment.CommentBasePT;
 import aiss.PeerTube.repositoryPT.CommentPTRepository;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

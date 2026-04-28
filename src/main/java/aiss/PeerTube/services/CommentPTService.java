@@ -1,13 +1,14 @@
 package aiss.PeerTube.services;
 
-import aiss.PeerTube.modelPT.comment.CommentBasePT;
-import aiss.PeerTube.modelPT.comment.CommentThreadPT;
-import aiss.PeerTube.modelPT.comment.CommentPTResponse; // Clase envoltorio (Wrapper)
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import aiss.PeerTube.model.comment.CommentBasePT;
+import aiss.PeerTube.model.comment.CommentPTResponse;
+import aiss.PeerTube.model.comment.CommentThreadPT;
 
 import java.util.List;
 

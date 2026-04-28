@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import aiss.PeerTube.modelPT.caption.CaptionPT;
+import aiss.PeerTube.model.caption.CaptionPT;
 import aiss.PeerTube.services.CaptionPTService;
 
 @Repository

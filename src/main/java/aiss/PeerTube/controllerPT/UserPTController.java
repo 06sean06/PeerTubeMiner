@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import aiss.PeerTube.exception.UserNotFoundException;
-import aiss.PeerTube.modelPT.channel.OwnerAccountPT;
+import aiss.PeerTube.model.channel.OwnerAccountPT;
 import aiss.PeerTube.repositoryPT.UserPTRepository;
 
 @RestController

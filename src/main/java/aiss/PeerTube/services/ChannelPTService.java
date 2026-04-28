@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import aiss.PeerTube.modelPT.channel.ChannelPT;
-import aiss.PeerTube.modelPT.channel.ChannelPTResponse;
+import aiss.PeerTube.model.channel.ChannelPT;
+import aiss.PeerTube.model.channel.ChannelPTResponse;
 @Service
 public class ChannelPTService {
     @Autowired

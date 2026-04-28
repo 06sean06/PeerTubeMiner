@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import aiss.PeerTube.exception.ChannelNotFoundException;
-import aiss.PeerTube.modelPT.channel.ChannelPT;
+import aiss.PeerTube.model.channel.ChannelPT;
 import aiss.PeerTube.repositoryPT.ChannelPTRepository;
 
 @RestController
