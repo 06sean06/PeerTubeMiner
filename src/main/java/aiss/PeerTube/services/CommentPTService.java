@@ -1,3 +1,4 @@
+
 package aiss.PeerTube.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class CommentPTService {
         
         CommentPTResponse body = response.getBody();
         if (body == null || body.getData() == null) {
-            return List.of(); // Devuelve lista vacía si no hay nada, como en tu imagen
+            return List.of(); // Devuelve lista vacía si no hay nada
         }
         return body.getData();
     }

@@ -8,8 +8,6 @@ public class CommentPTResponse {
     @JsonProperty("data")
     private List<CommentThreadPT> data;
 
-    
-    @JsonProperty("data") 
     private List<CommentBasePT> dataBase;
 
     public List<CommentThreadPT> getData() {
@@ -20,12 +18,13 @@ public class CommentPTResponse {
         this.data = data;
     }
 
-    public List<CommentBasePT> getDataBase() {
+    public List<CommentBasePT> getDataBase() {       
         return dataBase;
     }
+         
 
     public void setDataBase(List<CommentBasePT> dataBase) {
-        this.dataBase = dataBase;
+        this.dataBase = (List<CommentBasePT>) (Object) data;
     }
 }
     
