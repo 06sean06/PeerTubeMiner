@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import aiss.PeerTube.model.video.VideoPT;
+import aiss.PeerTube.model.modelPT.video.VideoPT;
 
 @SpringBootTest
 public class VideoPTServiceTest {

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import aiss.PeerTube.model.channel.ChannelPT;
+import aiss.PeerTube.model.modelPT.channel.ChannelPT;
 import aiss.PeerTube.services.ChannelPTService;
 
 @Repository

@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import aiss.PeerTube.model.caption.CaptionPT;
-import aiss.PeerTube.model.caption.CaptionPTResponse;
+import aiss.PeerTube.model.modelPT.caption.CaptionPT;
+import aiss.PeerTube.model.modelPT.caption.CaptionPTResponse;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

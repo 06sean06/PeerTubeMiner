@@ -12,8 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import aiss.PeerTube.model.channel.OwnerAccountPT;
-import aiss.PeerTube.model.channel.OwnerAccountPTResponse;
+import aiss.PeerTube.model.modelPT.channel.OwnerAccountPT;
+import aiss.PeerTube.model.modelPT.channel.OwnerAccountPTResponse;
 
 @Service
 public class UserPTService {

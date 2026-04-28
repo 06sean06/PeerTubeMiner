@@ -11,8 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import aiss.PeerTube.model.video.VideoPT;
-import aiss.PeerTube.model.video.VideoPTResponse;
+import aiss.PeerTube.model.modelPT.video.VideoPT;
+import aiss.PeerTube.model.modelPT.video.VideoPTResponse;
 
 @Service
 public class VideoPTService {

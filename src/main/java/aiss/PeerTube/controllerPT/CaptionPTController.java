@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import aiss.PeerTube.exception.VideoNotFoundException;
-import aiss.PeerTube.model.caption.CaptionPT;
+import aiss.PeerTube.model.modelPT.caption.CaptionPT;
 import aiss.PeerTube.repositoryPT.CaptionPTRepository;
 
 @RestController

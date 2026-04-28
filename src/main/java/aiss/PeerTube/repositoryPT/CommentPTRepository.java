@@ -1,7 +1,7 @@
 package aiss.PeerTube.repositoryPT;
 import org.springframework.stereotype.Repository;
 
-import aiss.PeerTube.model.comment.CommentBasePT;
+import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
 
 import java.util.ArrayList;
 import java.util.List;

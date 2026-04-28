@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import aiss.PeerTube.model.comment.CommentBasePT;
-import aiss.PeerTube.model.comment.CommentThreadPT;
+import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
+import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
 
 import java.util.List;
 
