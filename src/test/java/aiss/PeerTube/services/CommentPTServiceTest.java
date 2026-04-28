@@ -23,7 +23,7 @@ public class CommentPTServiceTest {
     void testFindAllCommentsByVideo() {
         String videoId = "71178";
         List<CommentThreadPT> threads = commentPTService.getCommentsByVideo(videoId);
-    
+        assertNotNull(threads);
     }
 
     @Test
@@ -32,13 +32,14 @@ public class CommentPTServiceTest {
         String videoId = "71178";
         String threadId = "89306";
         CommentBasePT comment = commentPTService.getSpecificComment(videoId, threadId);
-        
+        assertNotNull(comment);
     }
 
     @Test
     @DisplayName("Obtener todos los comentarios de la instancia")
     void testFindAllInstanceComments() {
         List<CommentBasePT> allComments = commentPTService.getAllInstanceComments();
+        assertNotNull(allComments);
     }
 }
     

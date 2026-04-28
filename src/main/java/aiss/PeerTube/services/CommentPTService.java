@@ -61,6 +61,6 @@ public class CommentPTService {
         if (body == null || body.getDataBase() == null) {
             return List.of();
         }
-        return body.getDataBase(); // Asegúrate de que CommentResponsePT tenga este método para List<CommentBasePT>
+        return body.getDataBase();
     }
 }
