@@ -7,7 +7,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
+
 import aiss.PeerTube.model.modelPT.comment.CommentPTResponse;
 import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
 
@@ -45,9 +45,13 @@ public class CommentPTService {
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Void> request = new HttpEntity<>(headers);
 
-        @SuppressWarnings("null")
+        try {    
         ResponseEntity<CommentThreadPT> response = restTemplate.exchange(uri, HttpMethod.GET, request, CommentThreadPT.class);
-        
         return response.getBody();
+    } catch (org.springframework.web.client.HttpClientErrorException.NotFound e) {     // captura de error 
+        return null;
+    } catch (Exception e) {
+        return null;
     }
+}
 }
