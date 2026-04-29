@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
+import aiss.PeerTube.model.modelPT.comment.CommentPTResponse;
 import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,28 +18,40 @@ public class CommentPTServiceTest {
     CommentPTService commentPTService;
 
     @Test
-    @DisplayName("Comentarios de un video")
-    void testFindAllCommentsByVideo() {
-        String videoId = "71178";
-        List<CommentThreadPT> threads = commentPTService.getCommentsByVideo(videoId);
-        assertNotNull(threads);
+@DisplayName("Comentarios de un video")
+void testFindAllCommentsByVideo() {
+    String videoId = "5JoZUZzbUdpNqGXpd5QJ5T";
+    CommentPTResponse response = commentPTService.getCommentsByVideo(videoId);
+    CommentBasePT first = response.getData().get(0);
+
+    assertNotNull(response, "La respuesta no debe ser null");
+    assertNotNull(response.getData(), "La lista de comentarios no debe ser null");
+
+    assertEquals(4, response.getData().size(), "Debe haber 4 comentarios");
+    assertEquals(88985, first.getId());
+    assertEquals("<p>This is by far the best and most cinematic one from blenderstudio.</p>\n",
+        first.getText());
+    assertEquals("Helkriz", first.getAccount().getName());
     }
 
     @Test
     @DisplayName("Obtener un comentario en específico")
     void testFindSpecificComment() {
-        String videoId = "71178";
-        String threadId = "89306";
-        CommentBasePT comment = commentPTService.getSpecificComment(videoId, threadId);
-        assertNotNull(comment);
-    }
+        String videoId = "5JoZUZzbUdpNqGXpd5QJ5T";
+        String threadId = "88985";
+        CommentThreadPT thread = commentPTService.getSpecificComment(videoId, threadId);
+        CommentBasePT comment = thread.getComment();
 
-    @Test
-    @DisplayName("Obtener todos los comentarios de la instancia")
-    void testFindAllInstanceComments() {
-        List<CommentBasePT> allComments = commentPTService.getAllInstanceComments();
-        assertNotNull(allComments);
-    }
+        assertNotNull(thread);
+        assertNotNull(thread.getComment());
+
+        assertEquals(88985, comment.getId());
+        assertEquals("<p>This is by far the best and most cinematic one from blenderstudio.</p>\n",
+        comment.getText());
+        assertEquals("Helkriz", comment.getAccount().getName());
+}
+
+
 }
     
 

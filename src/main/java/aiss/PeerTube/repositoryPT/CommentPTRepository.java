@@ -1,27 +1,25 @@
 package aiss.PeerTube.repositoryPT;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
-
-import java.util.ArrayList;
-import java.util.List;
+import aiss.PeerTube.model.modelPT.comment.CommentPTResponse;
+import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
+import aiss.PeerTube.services.CommentPTService;
 
 @Repository
 public class CommentPTRepository {
-    private List<CommentBasePT> comments = new ArrayList<>();
 
-    public List<CommentBasePT> findAll(){
-        return comments;
-    }
-    public CommentBasePT findById(Integer id){
-        return comments.stream()
-                .filter(c -> c.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+    @Autowired
+    CommentPTService commentPTService;
 
+    // GET ALL COMMENTS FROM A VIDEO
+    public CommentPTResponse findAllCommentsByVideo(String videoId) {
+        return commentPTService.getCommentsByVideo(videoId);
     }
-    public void save (CommentBasePT comment){
-        comments.add(comment);
+
+    // GET SPECIFIC COMMENT FROM A VIDEO
+    public CommentThreadPT findSpecificComment(String videoId, String threadId) {
+        return commentPTService.getSpecificComment(videoId, threadId);
     }
-    
 }

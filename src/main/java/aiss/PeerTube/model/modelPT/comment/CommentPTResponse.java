@@ -5,27 +5,36 @@ import java.util.List;
 
 public class CommentPTResponse {
 
+    @JsonProperty("total")
+    private Integer total;
+
     @JsonProperty("data")
-    private List<CommentThreadPT> data;
+    private List<CommentBasePT> data;
 
-    private List<CommentBasePT> dataBase;
+    @JsonProperty("totalNotDeletedComments")
+    private Integer totalNotDeletedComments;
 
-    public List<CommentThreadPT> getData() {
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    public List<CommentBasePT> getData() {
         return data;
     }
 
-    public void setData(List<CommentThreadPT> data) {
+    public void setData(List<CommentBasePT> data) {
         this.data = data;
     }
 
-    public List<CommentBasePT> getDataBase() {       
-        return dataBase;
+    public Integer getTotalNotDeletedComments() {
+        return totalNotDeletedComments;
     }
-         
 
-    public void setDataBase(List<CommentBasePT> dataBase) {
-        this.dataBase = (List<CommentBasePT>) (Object) data;
+    public void setTotalNotDeletedComments(Integer totalNotDeletedComments) {
+        this.totalNotDeletedComments = totalNotDeletedComments;
     }
 }
-    
-

@@ -22,46 +22,32 @@ public class CommentPTService {
     @Value("${peertube.url}")
     private String url;
 
+    // Obtener los comentarios de un video 
     // GET https://peertube3.cpy.re/api/v1/videos/{id}/comment-threads
-    public List<CommentThreadPT> getCommentsByVideo(String videoId) {
+    @SuppressWarnings("null")
+    public CommentPTResponse getCommentsByVideo(String videoId) {
         String uri = url + "/videos/" + videoId + "/comment-threads";
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Void> request = new HttpEntity<>(headers);
-        @SuppressWarnings("null")
+
         ResponseEntity<CommentPTResponse> response = restTemplate.exchange(uri, HttpMethod.GET, request, CommentPTResponse.class);
-        
         CommentPTResponse body = response.getBody();
         if (body == null || body.getData() == null) {
-            return List.of(); // Devuelve lista vacía si no hay nada
+            return null;
         }
-        return body.getData();
+        return body;
     }
 
+    // Dado un idVideo y un idComment, te devuelve el comentario de ese video en específico. 
     // GET https://peertube3.cpy.re/api/v1/videos/{id}/comment-threads/{threadId}
-    public CommentBasePT getSpecificComment(String videoId, String threadId) {
+    public CommentThreadPT getSpecificComment(String videoId, String threadId) {
         String uri = url + "/videos/" + videoId + "/comment-threads/" + threadId;
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Void> request = new HttpEntity<>(headers);
 
         @SuppressWarnings("null")
-        ResponseEntity<CommentBasePT> response = restTemplate.exchange(uri, HttpMethod.GET, request, CommentBasePT.class);
+        ResponseEntity<CommentThreadPT> response = restTemplate.exchange(uri, HttpMethod.GET, request, CommentThreadPT.class);
         
         return response.getBody();
-    }
-    
-    // GET https://peertube3.cpy.re/api/v1/videos/comments
-    public List<CommentBasePT> getAllInstanceComments() {
-        String uri = url + "/videos/comments";
-        HttpHeaders headers = new HttpHeaders();
-        HttpEntity<Void> request = new HttpEntity<>(headers);
-
-        @SuppressWarnings("null")
-        ResponseEntity<CommentPTResponse> response = restTemplate.exchange(uri, HttpMethod.GET, request, CommentPTResponse.class);
-        
-        CommentPTResponse body = response.getBody();
-        if (body == null || body.getDataBase() == null) {
-            return List.of();
-        }
-        return body.getDataBase();
     }
 }

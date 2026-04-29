@@ -1,30 +1,36 @@
 package aiss.PeerTube.controllerPT;
 
-import aiss.PeerTube.exception.CommentNotFoundException;
-import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import aiss.PeerTube.model.modelPT.comment.CommentPTResponse;
 import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
-import aiss.PeerTube.services.CommentPTService;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
+import aiss.PeerTube.repositoryPT.CommentPTRepository;
 
 @RestController
 @RequestMapping("PeerTube/comments")
 public class CommentPTController {
-    private final CommentPTService commentService;
 
-    public CommentPTController(CommentPTService commentService){
-        this.commentService = commentService;
+    private final CommentPTRepository commentRepository;
+
+    public CommentPTController(CommentPTRepository commentRepository) {
+        this.commentRepository = commentRepository;
     }
 
-    // GET http://localhost:8080/PeerTube/comments
-    @GetMapping
-    public List<CommentBasePT> getComment(){
-        return commentService.getAllInstanceComments();
+    // GET http://localhost:8080/PeerTube/comments/{videoId}
+    @GetMapping("/{videoId}")
+    public CommentPTResponse getCommentsByVideo(@PathVariable String videoId) {
+        return commentRepository.findAllCommentsByVideo(videoId);
     }
 
-    // GET http://localhost:8080/PeerTube/videos/{videoId}/comments
-    @GetMapping("/videos/{videoId}/comments")
-    public List<CommentThreadPT> getCommentById(@PathVariable String videoId, @PathVariable String threadId) throws CommentNotFoundException{
-        return commentService.getCommentsByVideo(videoId);
+    // GET http://localhost:8080/PeerTube/comments/{videoId}/{threadId}
+    @GetMapping("/{videoId}/{threadId}")
+    public CommentThreadPT getSpecificComment(
+            @PathVariable String videoId,
+            @PathVariable String threadId) {
+
+        return commentRepository.findSpecificComment(videoId, threadId);
     }
 }
