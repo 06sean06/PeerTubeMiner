@@ -40,11 +40,4 @@ public class CaptionPTService {
         return body.getData();
     }
 
-    //Transformar caption
-    public CaptionVM transformCaption(CaptionPT data) {
-        CaptionVM caption = new CaptionVM ();
-        caption.setLanguage(data.getLanguage().getLabel());   //mirar si label es el nombre del lenguaje
-        caption.setLink(data.getCaptionPath());    //mirar si captionPath es el enlace de la caption
-        return caption;
-    }
 }

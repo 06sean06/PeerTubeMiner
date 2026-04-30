@@ -48,13 +48,4 @@ public class VideoPTService {
         return response.getBody();
     }
 
-    //Transformar video
-    public VideoVM transformVideo(VideoPT data) {
-        VideoVM video = new VideoVM();
-        video.setId(data.getId().toString());
-        video.setName(data.getName());
-        video.setDescription(data.getDescription().toString());
-        video.setReleaseTime(data.getPublishedAt());
-        return video;
-    }
 }

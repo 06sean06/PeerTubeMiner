@@ -53,16 +53,4 @@ public class UserPTService {
         return response.getBody();
     }
 
-    //Transformar user
-    public UserVM transformUser(OwnerAccountPT data) {
-        UserVM user = new UserVM();
-        user.setId(data.getId().toString());
-        user.setName(data.getName());
-        if (data.getAvatars() != null && !data.getAvatars().isEmpty()) {
-            user.setPicture_link(data.getAvatars().get(0).toString());
-        } else {
-            user.setPicture_link(null);
-        }
-        return user;
-    }
 }
