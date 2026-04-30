@@ -13,7 +13,7 @@ import aiss.PeerTube.model.modelPT.caption.CaptionPT;
 import aiss.PeerTube.repositoryPT.CaptionPTRepository;
 
 @RestController
-@RequestMapping("PeerTube/captions")
+@RequestMapping("PeerTubeMiner/captions")
 public class CaptionPTController {
 
     private CaptionPTRepository captionPTRepository;
@@ -25,7 +25,7 @@ public class CaptionPTController {
         this.captionPTRepository = captionPTRepository;
     }
 
-    // GET http://localhost:8080/PeerTube/captions/{id}
+    // GET http://localhost:8082/PeerTubeMiner/captions/{id}
     @GetMapping("/{idVideo}")
     public List<CaptionPT> getCaptions(@PathVariable String idVideo) throws VideoNotFoundException {
         return captionPTRepository.findAll(idVideo);
