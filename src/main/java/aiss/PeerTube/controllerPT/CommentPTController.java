@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import aiss.PeerTube.exception.CommentNotFoundException;
 import aiss.PeerTube.model.modelPT.comment.CommentPTResponse;
 import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
 import aiss.PeerTube.repositoryPT.CommentPTRepository;
@@ -29,8 +30,10 @@ public class CommentPTController {
     @GetMapping("/{videoId}/{threadId}")
     public CommentThreadPT getSpecificComment(
             @PathVariable String videoId,
-            @PathVariable String threadId) {
-
-        return commentRepository.findSpecificComment(videoId, threadId);
+            @PathVariable String threadId) throws CommentNotFoundException {
+                CommentThreadPT comment = commentRepository.findSpecificComment(videoId, threadId);  
+                if (comment == null) {
+                    throw new CommentNotFoundException();
+                }return comment;
     }
 }
