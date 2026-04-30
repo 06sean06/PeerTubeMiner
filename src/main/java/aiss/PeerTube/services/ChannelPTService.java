@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import aiss.PeerTube.model.modelPT.channel.ChannelPT;
 import aiss.PeerTube.model.modelPT.channel.ChannelPTResponse;
+import aiss.PeerTube.model.modelVM.ChannelVM;
 @Service
 public class ChannelPTService {
     @Autowired
@@ -43,6 +44,16 @@ public class ChannelPTService {
         @SuppressWarnings("null") // Lo he añadido porque VSCode cree que HttpMethod.GET es null, pero no lo es, es un enum.
         ResponseEntity<ChannelPT> response = restTemplate.exchange(uri, HttpMethod.GET, request, ChannelPT.class);
         return response.getBody();
+    }
+
+    //Transformar canal
+    public ChannelVM transformChannel(ChannelPT data) {
+        ChannelVM channel = new ChannelVM();
+        channel.setId(data.getId().toString());
+        channel.setName(data.getName());
+        channel.setDescription(data.getDescription().toString());
+        channel.setCreated_time(data.getCreatedAt());
+        return channel;
     }
 
     

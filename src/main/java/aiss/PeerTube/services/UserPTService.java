@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import aiss.PeerTube.model.modelPT.channel.OwnerAccountPT;
 import aiss.PeerTube.model.modelPT.channel.OwnerAccountPTResponse;
+import aiss.PeerTube.model.modelVM.UserVM;
 
 @Service
 public class UserPTService {
@@ -50,5 +51,18 @@ public class UserPTService {
         @SuppressWarnings("null") // Lo he añadido porque VSCode cree que HttpMethod.GET es null, pero no lo es, es un enum.
         ResponseEntity<OwnerAccountPT> response = restTemplate.exchange(uri, HttpMethod.GET, request, OwnerAccountPT.class);
         return response.getBody();
+    }
+
+    //Transformar user
+    public UserVM transformUser(OwnerAccountPT data) {
+        UserVM user = new UserVM();
+        user.setId(data.getId().toString());
+        user.setName(data.getName());
+        if (data.getAvatars() != null && !data.getAvatars().isEmpty()) {
+            user.setPicture_link(data.getAvatars().get(0).toString());
+        } else {
+            user.setPicture_link(null);
+        }
+        return user;
     }
 }

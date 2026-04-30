@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
 import aiss.PeerTube.model.modelPT.comment.CommentPTResponse;
 import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
+import aiss.PeerTube.model.modelVM.CommentVM;
 
 import java.util.List;
 
@@ -62,5 +63,14 @@ public class CommentPTService {
             return List.of();
         }
         return body.getDataBase(); // Asegúrate de que CommentResponsePT tenga este método para List<CommentBasePT>
+    }
+
+    //Transformar comentario
+    public CommentVM transformComment(CommentBasePT data) {
+        CommentVM comment = new CommentVM();
+        comment.setId(data.getId().toString());
+        comment.setText(data.getText());
+        comment.setCreatedOn(data.getCreatedAt());
+        return comment;
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import aiss.PeerTube.model.modelPT.caption.CaptionPT;
 import aiss.PeerTube.model.modelPT.caption.CaptionPTResponse;
+import aiss.PeerTube.model.modelVM.CaptionVM;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -37,5 +38,13 @@ public class CaptionPTService {
             return List.of();
         }
         return body.getData();
+    }
+
+    //Transformar caption
+    public CaptionVM transformCaption(CaptionPT data) {
+        CaptionVM caption = new CaptionVM ();
+        caption.setLanguage(data.getLanguage().getLabel());   //mirar si label es el nombre del lenguaje
+        caption.setLink(data.getCaptionPath());    //mirar si captionPath es el enlace de la caption
+        return caption;
     }
 }
