@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import aiss.PeerTube.model.modelPT.video.VideoPT;
 import aiss.PeerTube.model.modelPT.video.VideoPTResponse;
 import aiss.PeerTube.model.modelVM.VideoVM;
+import aiss.PeerTube.transformer.Transformer;
 
 @Service
 public class VideoPTService {
@@ -23,6 +24,12 @@ public class VideoPTService {
 
     @Value("${peertube.url}")
     private String url;
+
+    @Autowired
+    Transformer transformer;
+
+    @Value("${videominer.url}")
+    private String urlvm; //http://localhost:8080/VideoMiner
 
     // GET https://peertube3.cpy.re/api/v1/videos
     public List<VideoPT> findAllVideos() {
@@ -46,6 +53,22 @@ public class VideoPTService {
         @SuppressWarnings("null") // Lo he añadido porque VSCode cree que HttpMethod.GET es null, pero no lo es, es un enum.
         ResponseEntity<VideoPT> response = restTemplate.exchange(uri, HttpMethod.GET, request, VideoPT.class);
         return response.getBody();
+    }
+
+    //POST VIDEO http://localhost:8080/VideoMiner/videos
+    public VideoVM createVideo(VideoPT videoPT) {
+        String uri = urlvm + "/videos";
+        VideoVM transformed = transformer.transformVideo(videoPT);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<VideoVM> request = new HttpEntity<>(transformed, headers);
+        @SuppressWarnings("null")
+        ResponseEntity<VideoVM> response = restTemplate.exchange(uri, HttpMethod.POST, request, VideoVM.class);
+        VideoVM video  = response.getBody();
+        if (video == null ) {
+            return null;
+        }
+        return video;
     }
 
 }
