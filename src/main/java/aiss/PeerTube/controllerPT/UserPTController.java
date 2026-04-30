@@ -12,7 +12,7 @@ import aiss.PeerTube.model.modelPT.channel.OwnerAccountPT;
 import aiss.PeerTube.repositoryPT.UserPTRepository;
 
 @RestController
-@RequestMapping("PeerTube/accounts")
+@RequestMapping("PeerTubeMiner/accounts")
 public class UserPTController {
     private UserPTRepository userRepository;
 
@@ -20,13 +20,13 @@ public class UserPTController {
         this.userRepository = userRepository;
     }
 
-    // GET http://localhost:8080/PeerTube/accounts
+    // GET http://localhost:8082/PeerTubeMiner/accounts
     @GetMapping
     public List<OwnerAccountPT> getUsers() {
         return userRepository.findAllUsers();
     }
 
-    // GET http://localhost:8080/PeerTube/accounts/{userName}
+    // GET http://localhost:8082/PeerTubeMiner/accounts/{userName}
     @GetMapping("/{userName}")
     public OwnerAccountPT getUserByName(@PathVariable String userName) throws UserNotFoundException {
         return userRepository.findUserByName(userName);

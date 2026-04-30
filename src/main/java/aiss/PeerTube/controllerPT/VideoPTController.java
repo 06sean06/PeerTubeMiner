@@ -12,7 +12,7 @@ import aiss.PeerTube.model.modelPT.video.VideoPT;
 import aiss.PeerTube.repositoryPT.VideoPTRepository;
 
 @RestController
-@RequestMapping("PeerTube/videos")
+@RequestMapping("PeerTubeMiner/videos")
 public class VideoPTController {
 
     private VideoPTRepository videoRepository;
@@ -21,12 +21,12 @@ public class VideoPTController {
         this.videoRepository = videoRepository;
     }
 
-    // GET http://localhost:8080/PeerTube/videos
+    // GET http://localhost:8082/PeerTubeMiner/videos
     @GetMapping
     public List<VideoPT> getVideos() {
         return videoRepository.findAllVideos();
     }
-    // GET http://localhost:8080/PeerTube/videos/{idVideo}
+    // GET http://localhost:8082/PeerTubeMiner/videos/{idVideo}
     @GetMapping("/{idVideo}")
     public VideoPT getVideoById(@PathVariable String idVideo) throws VideoNotFoundException {
         return videoRepository.findVideoById(idVideo);

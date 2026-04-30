@@ -12,7 +12,7 @@ import aiss.PeerTube.model.modelPT.channel.ChannelPT;
 import aiss.PeerTube.repositoryPT.ChannelPTRepository;
 
 @RestController
-@RequestMapping("PeerTube/channels")
+@RequestMapping("PeerTubeMiner/channels")
 public class ChannelPTController {
     private ChannelPTRepository channelRepository;
 
@@ -20,12 +20,12 @@ public class ChannelPTController {
         this.channelRepository = channelRepository;
     }
 
-    // GET http://localhost:8080/PeerTube/channels
+    // GET http://localhost:8082/PeerTubeMiner/channels
     @GetMapping
     public List<ChannelPT> getChannels() {
         return channelRepository.findAllChannels();
     }
-    // GET http://localhost:8080/PeerTube/channels/{channelHandle}
+    // GET http://localhost:8082/PeerTubeMiner/channels/{channelHandle}
     @GetMapping("/{channelHandle}")
     public ChannelPT getChannelById(@PathVariable String channelHandle) throws ChannelNotFoundException{
         return channelRepository.findChannelById(channelHandle);
