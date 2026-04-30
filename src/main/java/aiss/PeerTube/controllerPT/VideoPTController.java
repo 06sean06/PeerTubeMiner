@@ -32,6 +32,7 @@ public class VideoPTController {
     public List<VideoPT> getVideos() {
         return videoRepository.findAllVideos();
     }
+    
     // GET http://localhost:8082/PeerTubeMiner/videos/{idVideo}
     @GetMapping("/{idVideo}")
     public VideoPT getVideoById(@PathVariable String idVideo) throws VideoNotFoundException {
