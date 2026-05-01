@@ -12,7 +12,8 @@ import org.springframework.web.client.RestTemplate;
 
 import aiss.PeerTube.model.modelPT.channel.ChannelPT;
 import aiss.PeerTube.model.modelPT.channel.ChannelPTResponse;
-import aiss.PeerTube.model.modelVM.ChannelVM;
+import aiss.PeerTube.model.modelPT.video.VideoPT;
+import aiss.PeerTube.model.modelPT.video.VideoPTResponse;
 @Service
 public class ChannelPTService {
     @Autowired
@@ -20,6 +21,24 @@ public class ChannelPTService {
 
     @Value("${peertube.url}")
     private String url; 
+
+    // Obtener todos los videos de un canal.
+    public List<VideoPT> getVideosOfAChannel(String channelHandle) {
+        //https://peertube3.cpy.re/api/v1  /video-channels/{blender_open_movies@video.blender.org}/videos
+        String uri = url + "/video-channels/" + channelHandle + "/videos";
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<VideoPTResponse> request = new HttpEntity<>(headers);
+
+        @SuppressWarnings("null") // Lo he añadido porque VSCode cree que HttpMethod.GET es null, pero no lo es, es un enum.
+        ResponseEntity<VideoPTResponse> response = restTemplate.exchange(uri, HttpMethod.GET, request, VideoPTResponse.class);
+        VideoPTResponse body = response.getBody();
+        if (body == null || body.getData() == null) {
+            return null;
+        }
+
+        return body.getData();
+    }
+
     //Obtener el listado de canales de PeerTube. Se devuelve una lista vacía si no hay canales.
     // GET https://peertube3.cpy.re/api/v1/video-channels
     public List<ChannelPT> findAllChannels() {
