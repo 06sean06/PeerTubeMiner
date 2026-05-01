@@ -1,5 +1,7 @@
 package aiss.PeerTube.model.modelVM;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -9,7 +11,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "id",
     "name",
     "description",
-    "created_time"
+    "created_time",
+    "videos"
 })
 
 public class ChannelVM {
@@ -22,6 +25,9 @@ public class ChannelVM {
     private String description;
     @JsonProperty("created_time")
     private String created_time;
+
+    @JsonProperty("videos")
+    private List<VideoVM> videos;
 
     @JsonProperty("id")
     public String getId() {
@@ -61,6 +67,15 @@ public class ChannelVM {
     @JsonProperty("created_time")
     public void setCreated_time(String created_time) {
         this.created_time = created_time;
+    }
+
+    @JsonProperty("videos")
+    public List<VideoVM> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<VideoVM> videos) {
+        this.videos = videos;
     }
     
 }

@@ -38,6 +38,7 @@ public class ChannelPTService {
 
         return body.getData();
     }
+    
     // A PARTIR DEL CHANNEL SE OBTIENE EL OWNER ACCOUT (USUARIO)
     // A PARTIR DEL CHANNEL SE OBTIENEN LOS VIDEOS (getVideosOfAChannel). 
     // A PARTIR DE LOS VIDEOS (desde el id) SE OBTIENEN LAS CAPTIONS (findAllCaptionsOfVid)
