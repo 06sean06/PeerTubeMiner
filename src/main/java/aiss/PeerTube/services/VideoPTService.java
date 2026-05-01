@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import aiss.PeerTube.model.modelPT.video.VideoPT;
@@ -50,9 +51,15 @@ public class VideoPTService {
         String uri = url + "/videos/" + idVideo;
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<VideoPT> request = new HttpEntity<>(headers);
+        try{
         @SuppressWarnings("null") // Lo he añadido porque VSCode cree que HttpMethod.GET es null, pero no lo es, es un enum.
         ResponseEntity<VideoPT> response = restTemplate.exchange(uri, HttpMethod.GET, request, VideoPT.class);
         return response.getBody();
+    } catch (HttpClientErrorException.NotFound e) {    
+        return null;
+    } catch (Exception e) {
+        return null;
+    }
     }
 
     //POST VIDEO http://localhost:8080/VideoMiner/videos

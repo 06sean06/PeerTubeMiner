@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import aiss.PeerTube.model.modelPT.channel.ChannelPT;
@@ -64,9 +65,16 @@ public class ChannelPTService {
         String uri = url + "/video-channels/" + channelHandle;
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Void> request = new HttpEntity<>(headers);
-        @SuppressWarnings("null") // Lo he añadido porque VSCode cree que HttpMethod.GET es null, pero no lo es, es un enum.
-        ResponseEntity<ChannelPT> response = restTemplate.exchange(uri, HttpMethod.GET, request, ChannelPT.class);
-        return response.getBody();
-    }    
+        try{
+            @SuppressWarnings("null") // Lo he añadido porque VSCode cree que HttpMethod.GET es null, pero no lo es, es un enum.
+            ResponseEntity<ChannelPT> response = restTemplate.exchange(uri, HttpMethod.GET, request, ChannelPT.class);
+            return response.getBody();
+    } catch (HttpClientErrorException.NotFound e) {
+        return null;
+    } catch (Exception e) {
+        return null;
+    }
+
+}    
 
 }

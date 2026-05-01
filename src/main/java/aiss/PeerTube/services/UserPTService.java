@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import aiss.PeerTube.model.modelPT.channel.OwnerAccountPT;
@@ -48,9 +49,15 @@ public class UserPTService {
         String uri = url + "/accounts/" + accountName;
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Void> request = new HttpEntity<>(headers);
-        @SuppressWarnings("null") // Lo he añadido porque VSCode cree que HttpMethod.GET es null, pero no lo es, es un enum.
+       try {
+        @SuppressWarnings("null")
         ResponseEntity<OwnerAccountPT> response = restTemplate.exchange(uri, HttpMethod.GET, request, OwnerAccountPT.class);
         return response.getBody();
+    } catch (HttpClientErrorException.NotFound e) {
+        return null;
+    } catch (Exception e) {
+        return null;
+    }
     }
 
 }

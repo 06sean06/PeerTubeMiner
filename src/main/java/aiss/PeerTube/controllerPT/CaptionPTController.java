@@ -34,8 +34,14 @@ public class CaptionPTController {
     // GET http://localhost:8082/PeerTubeMiner/captions/{id}
     @GetMapping("/{idVideo}")
     public List<CaptionPT> getCaptions(@PathVariable String idVideo) throws VideoNotFoundException {
-        return captionPTRepository.findAll(idVideo);
+        List<CaptionPT> captions = captionPTRepository.findAll(idVideo); //no pido un subtítulo individual, sino una lista de subtítulos asociados a un vídeo.
+    if (captions == null) {
+        throw new VideoNotFoundException();
     }
+    
+    return captions;
+}
+    
 
     // POST http://localhost:8082/PeerTubeMiner/captions
     @PostMapping

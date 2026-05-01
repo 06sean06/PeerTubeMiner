@@ -29,7 +29,10 @@ public class UserPTController {
     // GET http://localhost:8082/PeerTubeMiner/accounts/{userName}
     @GetMapping("/{userName}")
     public OwnerAccountPT getUserByName(@PathVariable String userName) throws UserNotFoundException {
-        return userRepository.findUserByName(userName);
+        OwnerAccountPT user = userRepository.findUserByName(userName);
+    if (user == null) {
+        throw new UserNotFoundException();
+    }return user;
     }
     
 }
