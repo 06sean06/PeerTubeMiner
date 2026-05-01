@@ -1,15 +1,19 @@
 package aiss.PeerTube.transformer;
 
+
 import org.springframework.stereotype.Component;
 
 import aiss.PeerTube.model.modelPT.caption.CaptionPT;
 import aiss.PeerTube.model.modelPT.channel.ChannelPT;
 import aiss.PeerTube.model.modelPT.channel.OwnerAccountPT;
+import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
 import aiss.PeerTube.model.modelPT.video.VideoPT;
 import aiss.PeerTube.model.modelVM.CaptionVM;
 import aiss.PeerTube.model.modelVM.ChannelVM;
+import aiss.PeerTube.model.modelVM.CommentVM;
 import aiss.PeerTube.model.modelVM.UserVM;
 import aiss.PeerTube.model.modelVM.VideoVM;
+
 
 @Component
 public class Transformer {
@@ -54,5 +58,12 @@ public class Transformer {
         video.setReleaseTime(data.getPublishedAt());
         return video;
     }
-
+     //Transformar comentario
+    public CommentVM transformComment(CommentBasePT data) {
+        CommentVM comment = new CommentVM();
+        comment.setId(data.getId().toString());
+        comment.setText(data.getText());
+        comment.setCreatedOn(data.getCreatedAt());
+        return comment;
+    }
 }

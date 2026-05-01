@@ -28,6 +28,9 @@ public class ChannelPTController {
     // GET http://localhost:8082/PeerTubeMiner/channels/{channelHandle}
     @GetMapping("/{channelHandle}")
     public ChannelPT getChannelById(@PathVariable String channelHandle) throws ChannelNotFoundException{
-        return channelRepository.findChannelById(channelHandle);
+        ChannelPT channel = channelRepository.findChannelById(channelHandle);
+        if (channel == null){
+            throw new ChannelNotFoundException();
+        }return channel;
     }
 }

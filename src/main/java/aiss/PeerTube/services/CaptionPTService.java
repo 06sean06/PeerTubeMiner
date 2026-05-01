@@ -1,10 +1,12 @@
 package aiss.PeerTube.services;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import aiss.PeerTube.model.modelPT.caption.CaptionPT;
@@ -38,14 +40,19 @@ public class CaptionPTService {
         String uri = url + "/videos/" + idVideo + "/captions";
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Void> request = new HttpEntity<>(headers);
-        @SuppressWarnings("null") // Lo he añadido porque VSCode cree que HttpMethod.GET es null, pero no lo es, es un enum.
+        try {
+        @SuppressWarnings("null")
         ResponseEntity<CaptionPTResponse> response = restTemplate.exchange(uri, HttpMethod.GET, request, CaptionPTResponse.class);
         CaptionPTResponse body = response.getBody();
-        if (body == null || body.getData() == null) {
-            return List.of();
-        }
-        return body.getData();
+        return (body != null) ? body.getData() : Collections.emptyList();
+    } catch (HttpClientErrorException.NotFound e) {
+        return null; 
+    } catch (Exception e) {
+        return Collections.emptyList();
     }
+}
+        
+    
 
     //POST CAPTION http://localhost:8080/VideoMiner/captions
     public CaptionVM createCaption(CaptionPT captionPT) {
