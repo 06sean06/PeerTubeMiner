@@ -23,8 +23,8 @@ public class ChannelVM {
     private String name;
     @JsonProperty("description")
     private String description;
-    @JsonProperty("created_time")
-    private String created_time;
+    @JsonProperty("createdTime")
+    private String createdTime;
 
     @JsonProperty("videos")
     private List<VideoVM> videos;
@@ -59,14 +59,14 @@ public class ChannelVM {
         this.description = description;
     }
 
-    @JsonProperty("created_time")
-    public String getCreated_time() {
-        return created_time;
+    @JsonProperty("createdTime")
+    public String getCreatedTime() {
+        return createdTime;
     }
 
-    @JsonProperty("created_time")
-    public void setCreated_time(String created_time) {
-        this.created_time = created_time;
+    @JsonProperty("createdTime")
+    public void setCreatedTime(String createdTime) {
+        this.createdTime = createdTime;
     }
 
     @JsonProperty("videos")

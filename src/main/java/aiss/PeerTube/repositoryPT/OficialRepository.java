@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.client.RestTemplate;
 
 import aiss.PeerTube.model.modelPT.caption.CaptionPT;
 import aiss.PeerTube.model.modelPT.channel.ChannelPT;
@@ -35,18 +38,22 @@ public class OficialRepository {
     @Autowired
     private Transformer transformer;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Value("${videominer.url}")
+    private String urlvm; //http://localhost:8080/VideoMiner
+
     public ChannelVM getAChannel(String channelHandle) {
         ChannelPT canalPT = channelPTService.findChannelById(channelHandle);
         if (canalPT == null) {
             return null; // el controller lanzará ChannelNotFoundException
         }
         ChannelVM canalVM = transformer.transformChannel(canalPT);
-
         List<VideoPT> videosPT = channelPTService.getVideosOfAChannel(channelHandle);
         List<VideoVM> videosVM = new ArrayList<>();
 
         for (VideoPT videoPT : videosPT) {
-
             String videoId = videoPT.getId().toString();
             List<CaptionPT> captionsPT = captionPTService.findAllCaptionsOfVid(videoId);
             List<CommentBasePT> commentsPT = commentPTService.getCommentsByVideo(videoId).getData();
@@ -60,12 +67,20 @@ public class OficialRepository {
             videoVM.setCaptions(captionsVM);
             videoVM.setComments(commentsVM);
             videoVM.setUser(transformer.transformUser(videoPT.getAccount()));
-
             videosVM.add(videoVM);
         }
-
         canalVM.setVideos(videosVM);
-
         return canalVM;
     }
+
+    public ChannelVM createAChannel(String channelHandle) {
+    ChannelVM channelVM = getAChannel(channelHandle);
+    if (channelVM == null) {
+        return null; // el controller lanzará la excepción
+    }
+    String uri = urlvm + "/channels";
+    ResponseEntity<ChannelVM> response = restTemplate.postForEntity(uri, channelVM, ChannelVM.class);
+    return response.getBody();
+}
+
 }

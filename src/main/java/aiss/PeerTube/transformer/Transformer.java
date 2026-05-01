@@ -33,7 +33,7 @@ public class Transformer {
         channel.setId(data.getId().toString());
         channel.setName(data.getName());
         channel.setDescription(data.getDescription().toString());
-        channel.setCreated_time(data.getCreatedAt());
+        channel.setCreatedTime(data.getCreatedAt());
         return channel;
     }
 
