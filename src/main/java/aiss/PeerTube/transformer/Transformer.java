@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import aiss.PeerTube.model.modelPT.caption.CaptionPT;
 import aiss.PeerTube.model.modelPT.channel.ChannelPT;
 import aiss.PeerTube.model.modelPT.channel.OwnerAccountPT;
+import aiss.PeerTube.model.modelPT.comment.AccountPT;
 import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
 import aiss.PeerTube.model.modelPT.video.VideoPT;
 import aiss.PeerTube.model.modelVM.CaptionVM;
@@ -36,7 +37,7 @@ public class Transformer {
         return channel;
     }
 
-    //Transformar user
+    //Transformar user (en base al canal)
     public UserVM transformUser(OwnerAccountPT data) {
         UserVM user = new UserVM();
         user.setId(data.getId().toString());
@@ -48,6 +49,20 @@ public class Transformer {
         }
         return user;
     }
+
+    // Transformar user (en base a la cuenta asociada al video).
+    public UserVM transformUser(AccountPT data) {
+    UserVM user = new UserVM();
+    user.setId(data.getId().toString());
+    user.setName(data.getName());
+    if (data.getAvatars() != null && !data.getAvatars().isEmpty()) {
+        user.setPicture_link(data.getAvatars().get(0).getFileUrl());
+    } else {
+        user.setPicture_link(null);
+    }
+    return user;
+}
+
 
     //Transformar video
     public VideoVM transformVideo(VideoPT data) {

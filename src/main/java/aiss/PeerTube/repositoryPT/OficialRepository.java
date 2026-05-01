@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import aiss.PeerTube.model.modelPT.caption.CaptionPT;
 import aiss.PeerTube.model.modelPT.channel.ChannelPT;
 import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
-import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
 import aiss.PeerTube.model.modelPT.video.VideoPT;
 import aiss.PeerTube.model.modelVM.CaptionVM;
 import aiss.PeerTube.model.modelVM.ChannelVM;
@@ -34,10 +33,9 @@ public class OficialRepository {
     private CommentPTService commentPTService;
 
     @Autowired
-    private Transformer transformer; 
+    private Transformer transformer;
 
     public ChannelVM getAChannel(String channelHandle) {
-
         ChannelPT canalPT = channelPTService.findChannelById(channelHandle);
         ChannelVM canalVM = transformer.transformChannel(canalPT);
 
@@ -45,19 +43,20 @@ public class OficialRepository {
         List<VideoVM> videosVM = new ArrayList<>();
 
         for (VideoPT videoPT : videosPT) {
-            String videoId = videoPT.getId().toString(); // el id es String
 
+            String videoId = videoPT.getId().toString();
             List<CaptionPT> captionsPT = captionPTService.findAllCaptionsOfVid(videoId);
             List<CommentBasePT> commentsPT = commentPTService.getCommentsByVideo(videoId).getData();
 
             VideoVM videoVM = transformer.transformVideo(videoPT);
-            List<CaptionVM> captionsVM = captionsPT.stream().map(transformer::transformCaption).collect(Collectors.toList());
+            List<CaptionVM> captionsVM = captionsPT.stream()
+                    .map(transformer::transformCaption)
+                    .collect(Collectors.toList());
             List<CommentVM> commentsVM = commentsPT.stream().map(transformer::transformComment).collect(Collectors.toList());
 
             videoVM.setCaptions(captionsVM);
             videoVM.setComments(commentsVM);
-
-            videoVM.setUser(transformer.transformUser(canalPT.getOwnerAccount()));
+            videoVM.setUser(transformer.transformUser(videoPT.getAccount()));
 
             videosVM.add(videoVM);
         }
