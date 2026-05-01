@@ -37,6 +37,9 @@ public class OficialRepository {
 
     public ChannelVM getAChannel(String channelHandle) {
         ChannelPT canalPT = channelPTService.findChannelById(channelHandle);
+        if (canalPT == null) {
+            return null; // el controller lanzará ChannelNotFoundException
+        }
         ChannelVM canalVM = transformer.transformChannel(canalPT);
 
         List<VideoPT> videosPT = channelPTService.getVideosOfAChannel(channelHandle);
