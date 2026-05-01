@@ -7,6 +7,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import aiss.PeerTube.model.modelPT.channel.ChannelPT;
+import aiss.PeerTube.model.modelPT.comment.AccountPT;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "id",
@@ -39,12 +42,16 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "publishedAt",
     "originallyPublishedAt",
     "isLive",
+    "account",
+    "channel",
     "comments",
     "pluginData",
     "blacklisted",
     "blacklistedReason",
     "streamingPlaylists",
     "files",
+    "liveSchedules",
+    "support",
     "tags",
     "commentsPolicy",
     "downloadEnabled",
@@ -117,6 +124,10 @@ public class VideoPT {
     private Object originallyPublishedAt;
     @JsonProperty("isLive")
     private Boolean isLive;
+    @JsonProperty("account")
+    private AccountPT account;
+    @JsonProperty("channel")
+    private ChannelPT channel;
     @JsonProperty("comments")
     private Integer comments;
     @JsonProperty("pluginData")
@@ -129,6 +140,10 @@ public class VideoPT {
     private List<Object> streamingPlaylists;
     @JsonProperty("files")
     private List<File> files;
+    @JsonProperty("liveSchedules")
+    private List<Object> liveSchedules;
+    @JsonProperty("support")
+    private Object support;
     @JsonProperty("tags")
     private List<String> tags;
     @JsonProperty("commentsPolicy")
@@ -446,6 +461,26 @@ public class VideoPT {
         this.isLive = isLive;
     }
 
+    @JsonProperty("account")
+    public AccountPT getAccount() {
+        return account;
+    }
+
+    @JsonProperty("account")
+    public void setAccount(AccountPT account) {
+        this.account = account;
+    }
+
+    @JsonProperty("channel")
+    public ChannelPT getChannel() {
+        return channel;
+    }
+
+    @JsonProperty("channel")
+    public void setChannel(ChannelPT channel) {
+        this.channel = channel;
+    }
+
     @JsonProperty("comments")
     public Integer getComments() {
         return comments;
@@ -504,6 +539,26 @@ public class VideoPT {
     @JsonProperty("files")
     public void setFiles(List<File> files) {
         this.files = files;
+    }
+
+    @JsonProperty("liveSchedules")
+    public List<Object> getLiveSchedules() {
+        return liveSchedules;
+    }
+
+    @JsonProperty("liveSchedules")
+    public void setLiveSchedules(List<Object> liveSchedules) {
+        this.liveSchedules = liveSchedules;
+    }
+
+    @JsonProperty("support")
+    public Object getSupport() {
+        return support;
+    }
+
+    @JsonProperty("support")
+    public void setSupport(Object support) {
+        this.support = support;
     }
 
     @JsonProperty("tags")
@@ -710,6 +765,14 @@ public class VideoPT {
         sb.append('=');
         sb.append(((this.isLive == null)?"<null>":this.isLive));
         sb.append(',');
+        sb.append("account");
+        sb.append('=');
+        sb.append(((this.account == null)?"<null>":this.account));
+        sb.append(',');
+        sb.append("channel");
+        sb.append('=');
+        sb.append(((this.channel == null)?"<null>":this.channel));
+        sb.append(',');
         sb.append("comments");
         sb.append('=');
         sb.append(((this.comments == null)?"<null>":this.comments));
@@ -733,6 +796,14 @@ public class VideoPT {
         sb.append("files");
         sb.append('=');
         sb.append(((this.files == null)?"<null>":this.files));
+        sb.append(',');
+        sb.append("liveSchedules");
+        sb.append('=');
+        sb.append(((this.liveSchedules == null)?"<null>":this.liveSchedules));
+        sb.append(',');
+        sb.append("support");
+        sb.append('=');
+        sb.append(((this.support == null)?"<null>":this.support));
         sb.append(',');
         sb.append("tags");
         sb.append('=');
