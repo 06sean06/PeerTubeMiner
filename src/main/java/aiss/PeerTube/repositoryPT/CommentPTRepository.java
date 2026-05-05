@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
-import aiss.PeerTube.model.modelPT.comment.CommentPTResponse;
 import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
 import aiss.PeerTube.services.CommentPTService;
 
