@@ -74,13 +74,22 @@ public class OficialRepository {
     }
 
     public ChannelVM createAChannel(String channelHandle) {
-    ChannelVM channelVM = getAChannel(channelHandle);
-    if (channelVM == null) {
-        return null; // el controller lanzará la excepción
+        ChannelVM channelVM = getAChannel(channelHandle);
+        if (channelVM == null) {
+            return null; // el controller lanzará la excepción
+        }
+        String uri = urlvm + "/channels";
+        ResponseEntity<ChannelVM> response = restTemplate.postForEntity(uri, channelVM, ChannelVM.class);
+        return response.getBody();
     }
-    String uri = urlvm + "/channels";
-    ResponseEntity<ChannelVM> response = restTemplate.postForEntity(uri, channelVM, ChannelVM.class);
-    return response.getBody();
-}
+
+    public ChannelVM getAChannelByName (String name) {
+        ChannelPT channelPT = channelPTService.findChannelByName(name);
+        if (channelPT == null) {
+            return null; // el controller lanzará la excepción
+        }
+        return transformer.transformChannel(channelPT);
+
+    }
 
 }
