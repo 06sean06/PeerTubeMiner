@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import aiss.PeerTube.exception.CommentNotFoundException;
 import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
-import aiss.PeerTube.model.modelPT.comment.CommentPTResponse;
 import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
 import aiss.PeerTube.repositoryPT.CommentPTRepository;
 

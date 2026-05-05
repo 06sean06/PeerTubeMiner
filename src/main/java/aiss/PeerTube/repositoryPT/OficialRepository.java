@@ -89,13 +89,4 @@ public class OficialRepository {
         return response.getBody();
     }
 
-    public ChannelVM getAChannelByName (String name) {
-        ChannelPT channelPT = channelPTService.findChannelByName(name);
-        if (channelPT == null) {
-            return null; // el controller lanzará la excepción
-        }
-        return transformer.transformChannel(channelPT);
-
-    }
-
 }

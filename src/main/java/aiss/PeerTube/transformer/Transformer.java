@@ -32,7 +32,7 @@ public class Transformer {
         ChannelVM channel = new ChannelVM();
         channel.setId(data.getId().toString());
         channel.setName(data.getName());
-        channel.setDescription(data.getDescription().toString());
+        channel.setDescription(data.getDescription() == null ? "" : data.getDescription().toString());
         channel.setCreatedTime(data.getCreatedAt());
         return channel;
     }

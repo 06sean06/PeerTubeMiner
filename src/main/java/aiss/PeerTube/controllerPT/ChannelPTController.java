@@ -13,15 +13,12 @@ import aiss.PeerTube.model.modelPT.channel.ChannelPT;
 import aiss.PeerTube.model.modelVM.ChannelVM;
 import aiss.PeerTube.repositoryPT.ChannelPTRepository;
 import aiss.PeerTube.repositoryPT.OficialRepository;
-import aiss.PeerTube.services.ChannelPTService;
 
 @RestController
 @RequestMapping("PeerTubeMiner/channels")
 public class ChannelPTController {
     private ChannelPTRepository channelRepository;
 
-    @Autowired
-    private ChannelPTService channelPTService;
     @Autowired
     private OficialRepository oficialRepository;
 
