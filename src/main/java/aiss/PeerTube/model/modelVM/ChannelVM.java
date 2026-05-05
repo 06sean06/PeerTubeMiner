@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "id",
     "name",
     "description",
-    "created_time",
+    "createdTime",
     "videos"
 })
 
