@@ -9,10 +9,8 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
 import aiss.PeerTube.model.modelPT.comment.CommentPTResponse;
 import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
-import aiss.PeerTube.model.modelVM.CommentVM;
 
 
 

@@ -15,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 
 import aiss.PeerTube.model.modelPT.channel.OwnerAccountPT;
 import aiss.PeerTube.model.modelPT.channel.OwnerAccountPTResponse;
-import aiss.PeerTube.model.modelVM.UserVM;
 
 @Service
 public class UserPTService {
