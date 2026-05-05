@@ -37,6 +37,12 @@ public class OficialRepository {
 
     @Autowired
     private Transformer transformer;
+    
+    @Value("${PeerTube.maxVideos}")
+    private Integer defaultMaxVideos;
+
+    @Value("${PeerTube.maxComments}")
+    private Integer defaultMaxComments;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -50,13 +56,13 @@ public class OficialRepository {
             return null; // el controller lanzará ChannelNotFoundException
         }
         ChannelVM canalVM = transformer.transformChannel(canalPT);
-        List<VideoPT> videosPT = channelPTService.getVideosOfAChannel(channelHandle);
+        List<VideoPT> videosPT = channelPTService.getVideosOfAChannel(channelHandle, defaultMaxVideos);
         List<VideoVM> videosVM = new ArrayList<>();
 
         for (VideoPT videoPT : videosPT) {
             String videoId = videoPT.getId().toString();
             List<CaptionPT> captionsPT = captionPTService.findAllCaptionsOfVid(videoId);
-            List<CommentBasePT> commentsPT = commentPTService.getCommentsByVideo(videoId).getData();
+            List<CommentBasePT> commentsPT = commentPTService.getCommentsByVideo(videoId, defaultMaxComments);
 
             VideoVM videoVM = transformer.transformVideo(videoPT);
             List<CaptionVM> captionsVM = captionsPT.stream()

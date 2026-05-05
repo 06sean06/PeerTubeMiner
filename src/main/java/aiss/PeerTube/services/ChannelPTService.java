@@ -20,13 +20,17 @@ public class ChannelPTService {
     @Autowired
     RestTemplate restTemplate;
 
+     @Value("${PeerTube.maxVideos}")
+    private Integer defaultVideos;
+
     @Value("${peertube.url}")
     private String url; 
 
     // Obtener todos los videos de un canal.
-    public List<VideoPT> getVideosOfAChannel(String channelHandle) {
+    public List<VideoPT> getVideosOfAChannel(String channelHandle, Integer maxVideos) {
         //https://peertube3.cpy.re/api/v1  /video-channels/{blender_open_movies@video.blender.org}/videos
-        String uri = url + "/video-channels/" + channelHandle + "/videos";
+        int limit = (maxVideos != null) ? maxVideos : defaultVideos;
+        String uri = url + "/video-channels/" + channelHandle + "/videos?count=" + limit;
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<VideoPTResponse> request = new HttpEntity<>(headers);
 
@@ -34,7 +38,7 @@ public class ChannelPTService {
         ResponseEntity<VideoPTResponse> response = restTemplate.exchange(uri, HttpMethod.GET, request, VideoPTResponse.class);
         VideoPTResponse body = response.getBody();
         if (body == null || body.getData() == null) {
-            return null;
+            return List.of();
         }
 
         return body.getData();
