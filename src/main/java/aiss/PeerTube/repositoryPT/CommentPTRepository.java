@@ -1,9 +1,11 @@
 package aiss.PeerTube.repositoryPT;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import aiss.PeerTube.model.modelPT.comment.CommentPTResponse;
+import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
 import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
 import aiss.PeerTube.services.CommentPTService;
 
@@ -14,8 +16,8 @@ public class CommentPTRepository {
     CommentPTService commentPTService;
 
     // GET ALL COMMENTS FROM A VIDEO
-    public CommentPTResponse findAllCommentsByVideo(String videoId) {
-        return commentPTService.getCommentsByVideo(videoId);
+    public List<CommentBasePT> findAllCommentsByVideo(String videoId) {
+        return commentPTService.getCommentsByVideo(videoId, null); //para que sea el valor por defecto el de properties
     }
 
     // GET SPECIFIC COMMENT FROM A VIDEO

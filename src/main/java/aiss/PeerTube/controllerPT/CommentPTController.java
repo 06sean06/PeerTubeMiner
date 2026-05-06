@@ -1,12 +1,14 @@
 package aiss.PeerTube.controllerPT;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import aiss.PeerTube.exception.CommentNotFoundException;
-import aiss.PeerTube.model.modelPT.comment.CommentPTResponse;
+import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
 import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
 import aiss.PeerTube.repositoryPT.CommentPTRepository;
 
@@ -22,7 +24,7 @@ public class CommentPTController {
 
     // GET http://localhost:8082/PeerTubeMiner/comments/{videoId}
     @GetMapping("/{videoId}")
-    public CommentPTResponse getCommentsByVideo(@PathVariable String videoId) {
+    public List<CommentBasePT> getCommentsByVideo(@PathVariable String videoId) {
         return commentRepository.findAllCommentsByVideo(videoId);
     }
 

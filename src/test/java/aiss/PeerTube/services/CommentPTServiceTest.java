@@ -11,6 +11,10 @@ import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
+
+
 @SpringBootTest
 public class CommentPTServiceTest {
     
@@ -21,13 +25,13 @@ public class CommentPTServiceTest {
 @DisplayName("Comentarios de un video")
 void testFindAllCommentsByVideo() {
     String videoId = "5JoZUZzbUdpNqGXpd5QJ5T";
-    CommentPTResponse response = commentPTService.getCommentsByVideo(videoId);
-    CommentBasePT first = response.getData().get(0);
+    List<CommentBasePT> response = commentPTService.getCommentsByVideo(videoId, null );
+    CommentBasePT first = response.get(0);
 
     assertNotNull(response, "La respuesta no debe ser null");
-    assertNotNull(response.getData(), "La lista de comentarios no debe ser null");
+    assertFalse(response.isEmpty(), "La lista de comentarios no debe ser null");
 
-    assertEquals(4, response.getData().size(), "Debe haber 4 comentarios");
+    assertEquals(4, response.size(), "Debe haber 4 comentarios");
     assertEquals(88985, first.getId());
     assertEquals("<p>This is by far the best and most cinematic one from blenderstudio.</p>\n",
         first.getText());

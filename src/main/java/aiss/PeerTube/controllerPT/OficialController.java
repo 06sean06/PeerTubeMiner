@@ -22,10 +22,10 @@ public class OficialController {
         this.oficialRepository = oficialRepository;
     }
 
-    // GET http://localhost:8082/peertube/{name}
-    @GetMapping("/{name}")
-    public ChannelVM getChannelByName(@PathVariable String name) throws ChannelNotFoundException{
-        ChannelVM channel = oficialRepository.getAChannelByName(name);
+    // GET http://localhost:8082/peertube/{channelHandle}
+    @GetMapping("/{channelHandle}")
+    public ChannelVM getChannelById(@PathVariable String channelHandle) throws ChannelNotFoundException{
+        ChannelVM channel = oficialRepository.getAChannel(channelHandle);
         if (channel == null){
             throw new ChannelNotFoundException();
         }
@@ -39,9 +39,8 @@ public class OficialController {
         throw new ChannelNotFoundException();
     }
     return created;
+}
 
     
 }
 
-
-}
