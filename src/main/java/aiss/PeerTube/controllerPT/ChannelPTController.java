@@ -17,6 +17,7 @@ import aiss.PeerTube.repositoryPT.OficialRepository;
 @RestController
 @RequestMapping("PeerTubeMiner/channels")
 public class ChannelPTController {
+    
     private ChannelPTRepository channelRepository;
 
     @Autowired

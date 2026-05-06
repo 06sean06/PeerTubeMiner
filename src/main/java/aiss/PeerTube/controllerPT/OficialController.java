@@ -32,12 +32,12 @@ public class OficialController {
         return channel;
     }
 
-    @PostMapping("/{name}")
-    public ChannelVM createChannel(@PathVariable String name) throws ChannelNotFoundException, ChannelAlreadyExistsException {
-        ChannelVM created = oficialRepository.createAChannel(name);
+    @PostMapping("/{channelHandle}")
+    public ChannelVM createChannel(@PathVariable String channelHandle) throws ChannelNotFoundException, ChannelAlreadyExistsException {
+        ChannelVM created = oficialRepository.createAChannel(channelHandle);
         if (created == null) {
-        throw new ChannelNotFoundException();
-    }
+            throw new ChannelNotFoundException();
+        }
     return created;
 }
 
