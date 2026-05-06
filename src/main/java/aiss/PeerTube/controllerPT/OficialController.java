@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import aiss.PeerTube.exception.ChannelAlreadyExistsException;
 import aiss.PeerTube.exception.ChannelNotFoundException;
 import aiss.PeerTube.model.modelVM.ChannelVM;
 import aiss.PeerTube.repositoryPT.OficialRepository;
@@ -32,7 +33,7 @@ public class OficialController {
     }
 
     @PostMapping("/{name}")
-    public ChannelVM createChannel(@PathVariable String name) throws ChannelNotFoundException {
+    public ChannelVM createChannel(@PathVariable String name) throws ChannelNotFoundException, ChannelAlreadyExistsException {
         ChannelVM created = oficialRepository.createAChannel(name);
         if (created == null) {
         throw new ChannelNotFoundException();

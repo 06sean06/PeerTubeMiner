@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
+import aiss.PeerTube.exception.ChannelAlreadyExistsException;
 import aiss.PeerTube.model.modelPT.caption.CaptionPT;
 import aiss.PeerTube.model.modelPT.channel.ChannelPT;
 import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
@@ -73,13 +74,24 @@ public class OficialRepository {
         return canalVM;
     }
 
-    public ChannelVM createAChannel(String channelHandle) {
+    public ChannelVM createAChannel(String channelHandle) throws ChannelAlreadyExistsException {
         ChannelVM channelVM = getAChannel(channelHandle);
         if (channelVM == null) {
-            return null; // el controller lanzará la excepción
+            return null; 
         }
-        String uri = urlvm + "/channels";
-        ResponseEntity<ChannelVM> response = restTemplate.postForEntity(uri, channelVM, ChannelVM.class);
+        String uriPost = urlvm + "/channels";
+        String uriGet = urlvm + "/channels/" + channelHandle;
+        try {
+            ResponseEntity<ChannelVM> existingResponse = restTemplate.getForEntity(uriGet, ChannelVM.class);
+            if (existingResponse.getStatusCode().is2xxSuccessful()) {
+                throw new ChannelAlreadyExistsException();
+            }
+        } catch (ChannelAlreadyExistsException e) {
+            throw e;
+        } catch (Exception e) {
+            System.out.println("El canal no existe en VideoMiner, procediendo a crear...");
+        }
+        ResponseEntity<ChannelVM> response = restTemplate.postForEntity(uriPost, channelVM, ChannelVM.class);
         return response.getBody();
     }
 
