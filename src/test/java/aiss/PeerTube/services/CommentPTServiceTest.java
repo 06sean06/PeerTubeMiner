@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import aiss.PeerTube.model.modelPT.comment.CommentBasePT;
-import aiss.PeerTube.model.modelPT.comment.CommentPTResponse;
 import aiss.PeerTube.model.modelPT.comment.CommentThreadPT;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,25 +21,25 @@ public class CommentPTServiceTest {
     CommentPTService commentPTService;
 
     @Test
-@DisplayName("Comentarios de un video")
-void testFindAllCommentsByVideo() {
-    String videoId = "5JoZUZzbUdpNqGXpd5QJ5T";
-    List<CommentBasePT> response = commentPTService.getCommentsByVideo(videoId, null );
-    CommentBasePT first = response.get(0);
+    @DisplayName("Comentarios de un video")
+    void testGetCommentsByVideo() {
+        String videoId = "5JoZUZzbUdpNqGXpd5QJ5T";
+        List<CommentBasePT> response = commentPTService.getCommentsByVideo(videoId, null );
+        CommentBasePT first = response.get(0);
 
-    assertNotNull(response, "La respuesta no debe ser null");
-    assertFalse(response.isEmpty(), "La lista de comentarios no debe ser null");
+        assertNotNull(response, "La respuesta no debe ser null");
+        assertFalse(response.isEmpty(), "La lista de comentarios no debe ser null");
 
-    assertEquals(4, response.size(), "Debe haber 4 comentarios");
-    assertEquals(88985, first.getId());
-    assertEquals("<p>This is by far the best and most cinematic one from blenderstudio.</p>\n",
-        first.getText());
-    assertEquals("Helkriz", first.getAccount().getName());
+        assertEquals(4, response.size(), "Debe haber 4 comentarios");
+        assertEquals(88985, first.getId());
+        assertEquals("<p>This is by far the best and most cinematic one from blenderstudio.</p>\n",
+            first.getText());
+        assertEquals("Helkriz", first.getAccount().getName());
     }
 
     @Test
     @DisplayName("Obtener un comentario en específico")
-    void testFindSpecificComment() {
+    void testGetSpecificComment() {
         String videoId = "5JoZUZzbUdpNqGXpd5QJ5T";
         String threadId = "88985";
         CommentThreadPT thread = commentPTService.getSpecificComment(videoId, threadId);
