@@ -43,11 +43,6 @@ public class ChannelPTService {
 
         return body.getData().stream().limit(limit).collect(Collectors.toList());
     }
-    
-    // A PARTIR DEL CHANNEL SE OBTIENE EL OWNER ACCOUT (USUARIO)
-    // A PARTIR DEL CHANNEL SE OBTIENEN LOS VIDEOS (getVideosOfAChannel). 
-    // A PARTIR DE LOS VIDEOS (desde el id) SE OBTIENEN LAS CAPTIONS (findAllCaptionsOfVid)
-    // A PARTIR DE LOS VIDEOS (desde el id) SE OBTIENEN LOS COMMENTS (getCommentsByVideo)
 
     //Obtener el listado de canales de PeerTube. Se devuelve una lista vacía si no hay canales.
     // GET https://peertube3.cpy.re/api/v1/video-channels

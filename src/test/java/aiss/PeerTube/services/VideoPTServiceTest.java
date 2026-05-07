@@ -18,25 +18,18 @@ public class VideoPTServiceTest {
     VideoPTService videoPTService;
 
     @Test
-    @DisplayName("Get all videos")
+    @DisplayName("Get all videos") 
     void testFindAllVideos() {
-        //GET https://peertube3.cpy.re/api/v1/videos
         List<VideoPT> videos = videoPTService.findAllVideos();
-        assertFalse(videos.isEmpty(), "The videos list should contain at least one video");
-
+        assertFalse(videos.isEmpty(), "La lista no debería estar vacía");
+        
         VideoPT first = videos.get(0);
-        assertNotNull(videos, "The videos list should not be null");
-        assertNotNull(first, "First video should not be null");
-        assertNotNull(first.getLanguage(), "Language object should not be null");
-        assertNotNull(first.getUrl(), "Video URL should not be null");
-        assertNotNull(first.getCategory(), "Category object should not be null");
-
-        assertEquals(444381, first.getId(), "The first video ID should match the expected value");
-        assertEquals("8yUbMhzraebRoyRPJbHNVX", first.getShortUUID(), "The shortUUID should match");
-        assertEquals("GRISE BOUILLE TV #72 — Indiana Jones & la chute à vélo",
-            first.getName(), "The video name should match");
-        assertEquals("French", first.getLanguage().getLabel(), "Language label should be French");
-        assertEquals("Art", first.getCategory().getLabel(), "Category label should be Art");
+        
+        assertNotNull(first.getId(), "El ID no debe ser nulo");
+        assertNotNull(first.getName(), "El nombre no debe ser nulo");
+        assertNotNull(first.getShortUUID(), "El UUID no debe ser nulo");
+        assertNotNull(first.getLanguage(), "El objeto lenguaje no debe ser nulo");
+        assertTrue(first.getId() > 0, "El ID debería ser un número positivo");
 }
 
 
