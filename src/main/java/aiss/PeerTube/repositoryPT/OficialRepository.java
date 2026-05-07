@@ -88,9 +88,67 @@ public class OficialRepository {
             return null;
         }
     }
+    public ChannelVM getAChannel(String channelHandle, Integer MaxVIdeos, Integer MaxPages) {
+        try {
+            ChannelPT canalPT = channelPTRepository.findChannelById(channelHandle);
+            if (canalPT == null) {
+                return null; // el controller lanzará ChannelNotFoundException
+            }
+            ChannelVM canalVM = transformer.transformChannel(canalPT);
+            List<VideoPT> videosPT = channelPTRepository.getVideosOfAChannel(channelHandle, MaxVIdeos);
+            List<VideoVM> videosVM = new ArrayList<>();
+
+            for (VideoPT videoPT : videosPT) {
+                String videoId = videoPT.getId().toString();
+                List<CaptionPT> captionsPT = captionPTRepository.findAll(videoId);
+                List<CommentBasePT> commentsPT = commentPTRepository.findAllCommentsByVideo(videoId, MaxPages);
+
+                VideoVM videoVM = transformer.transformVideo(videoPT);
+                List<CaptionVM> captionsVM = (captionsPT == null) ? new ArrayList<>() : captionsPT.stream()
+                        .map(transformer::transformCaption)
+                        .collect(Collectors.toList());
+                List<CommentVM> commentsVM = (commentsPT == null) ? new ArrayList<>() : commentsPT.stream()
+                        .map(transformer::transformComment)
+                        .collect(Collectors.toList());
+
+                videoVM.setCaptions(captionsVM);
+                videoVM.setComments(commentsVM);
+                // set user if account present
+                if (videoPT.getAccount() != null) {
+                    videoVM.setUser(transformer.transformUser(videoPT.getAccount()));
+                }
+                videosVM.add(videoVM);
+            }
+            canalVM.setVideos(videosVM);
+            return canalVM;
+        } catch (ChannelNotFoundException | RuntimeException e) {
+            return null;
+        }
+    }
 
     public ChannelVM createAChannel(String channelHandle) throws ChannelAlreadyExistsException {
         ChannelVM channelVM = getAChannel(channelHandle);
+        if (channelVM == null) {
+            return null; 
+        }
+        String uriPost = urlvm + "/channels";
+        String uriGet = urlvm + "/channels/" + channelHandle;
+        try {
+            ResponseEntity<ChannelVM> existingResponse = restTemplate.getForEntity(uriGet, ChannelVM.class);
+            if (existingResponse.getStatusCode().is2xxSuccessful()) {
+                throw new ChannelAlreadyExistsException();
+            }
+        } catch (ChannelAlreadyExistsException e) {
+            throw e;
+        } catch (org.springframework.web.client.RestClientException e) {
+            System.out.println("El canal no existe en VideoMiner, procediendo a crear...");
+        }
+        ResponseEntity<ChannelVM> response = restTemplate.postForEntity(uriPost, channelVM, ChannelVM.class);
+        return response.getBody();
+    }
+
+     public ChannelVM createAChannel(String channelHandle, Integer maxvideos, Integer maxPages) throws ChannelAlreadyExistsException {
+        ChannelVM channelVM = getAChannel(channelHandle,maxvideos,maxPages);
         if (channelVM == null) {
             return null; 
         }

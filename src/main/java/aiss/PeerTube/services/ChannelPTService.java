@@ -1,5 +1,6 @@
 package aiss.PeerTube.services;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,7 +41,7 @@ public class ChannelPTService {
             return List.of();
         }
 
-        return body.getData();
+        return body.getData().stream().limit(limit).collect(Collectors.toList());
     }
     
     // A PARTIR DEL CHANNEL SE OBTIENE EL OWNER ACCOUT (USUARIO)
