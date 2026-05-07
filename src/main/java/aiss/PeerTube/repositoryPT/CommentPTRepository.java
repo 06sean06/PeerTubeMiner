@@ -20,6 +20,11 @@ public class CommentPTRepository {
         return commentPTService.getCommentsByVideo(videoId, null); //para que sea el valor por defecto el de properties
     }
 
+    // GET ALL COMMENTS FROM A VIDEO with max limit
+    public List<CommentBasePT> findAllCommentsByVideo(String videoId, Integer maxComments) {
+        return commentPTService.getCommentsByVideo(videoId, maxComments);
+    }
+
     // GET SPECIFIC COMMENT FROM A VIDEO
     public CommentThreadPT findSpecificComment(String videoId, String threadId) {
         return commentPTService.getSpecificComment(videoId, threadId);

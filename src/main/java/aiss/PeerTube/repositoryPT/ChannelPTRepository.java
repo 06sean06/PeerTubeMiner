@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import aiss.PeerTube.exception.ChannelNotFoundException;
 import aiss.PeerTube.model.modelPT.channel.ChannelPT;
+import aiss.PeerTube.model.modelPT.video.VideoPT;
 import aiss.PeerTube.services.ChannelPTService;
 
 @Repository
@@ -24,5 +25,9 @@ public class ChannelPTRepository {
             throw new ChannelNotFoundException();
         }
         return channel;
+    }
+
+    public List<VideoPT> getVideosOfAChannel(String channelHandle, Integer maxVideos) {
+        return channelPTService.getVideosOfAChannel(channelHandle, maxVideos);
     }
 }
