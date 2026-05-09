@@ -88,38 +88,35 @@ public class OficialRepository {
             return null;
         }
     }
-    public ChannelVM getAChannel(String channelHandle, Integer MaxVIdeos, Integer MaxPages) {
+    public ChannelVM getAChannel(String channelHandle, Integer maxVideos, Integer maxComments) {
         try {
             ChannelPT canalPT = channelPTRepository.findChannelById(channelHandle);
             if (canalPT == null) {
                 return null; // el controller lanzará ChannelNotFoundException
             }
             ChannelVM canalVM = transformer.transformChannel(canalPT);
-            List<VideoPT> videosPT = channelPTRepository.getVideosOfAChannel(channelHandle, MaxVIdeos);
+            List<VideoPT> videosPT = channelPTRepository.getVideosOfAChannel(channelHandle, maxVideos);
             List<VideoVM> videosVM = new ArrayList<>();
 
             for (VideoPT videoPT : videosPT) {
                 String videoId = videoPT.getId().toString();
                 List<CaptionPT> captionsPT = captionPTRepository.findAll(videoId);
-                List<CommentBasePT> commentsPT = commentPTRepository.findAllCommentsByVideo(videoId, MaxPages);
+                List<CommentBasePT> commentsPT = commentPTRepository.findAllCommentsByVideo(videoId, maxComments);
 
                 VideoVM videoVM = transformer.transformVideo(videoPT);
-                List<CaptionVM> captionsVM = (captionsPT == null) ? new ArrayList<>() : captionsPT.stream()
-                        .map(transformer::transformCaption)
-                        .collect(Collectors.toList());
-                List<CommentVM> commentsVM = (commentsPT == null) ? new ArrayList<>() : commentsPT.stream()
-                        .map(transformer::transformComment)
-                        .collect(Collectors.toList());
+                List<CaptionVM> captionsVM = (captionsPT == null) ? new ArrayList<>() : captionsPT.stream().map(transformer::transformCaption).collect(Collectors.toList());
+                List<CommentVM> commentsVM = (commentsPT == null) ? new ArrayList<>() : commentsPT.stream().map(transformer::transformComment).collect(Collectors.toList());
 
                 videoVM.setCaptions(captionsVM);
                 videoVM.setComments(commentsVM);
-                // set user if account present
+
                 if (videoPT.getAccount() != null) {
                     videoVM.setUser(transformer.transformUser(videoPT.getAccount()));
                 }
                 videosVM.add(videoVM);
             }
             canalVM.setVideos(videosVM);
+
             return canalVM;
         } catch (ChannelNotFoundException | RuntimeException e) {
             return null;

@@ -23,18 +23,18 @@ public class OficialController {
         this.oficialRepository = oficialRepository;
     }
 
-// GET http://localhost:8082/PeerTubeMiner/channels/{channelHandle}?maxVideos=3&maxPages=2
+// GET http://localhost:8082/PeerTubeMiner/channels/{channelHandle}?maxVideos=3&maxComments=2
     @GetMapping("/{channelHandle}")
     public ChannelVM getChannelById(
             @PathVariable String channelHandle,
             @RequestParam(required = false) Integer maxVideos,
-            @RequestParam(required = false) Integer maxPages
+            @RequestParam(required = false) Integer maxComments
     ) throws ChannelNotFoundException {
         ChannelVM channel;
 
     
-        if (maxVideos != null || maxPages != null) {
-            channel = oficialRepository.getAChannel(channelHandle,maxVideos , maxPages);
+        if (maxVideos != null || maxComments != null) {
+            channel = oficialRepository.getAChannel(channelHandle,maxVideos , maxComments);
         } else {
             channel = oficialRepository.getAChannel(channelHandle);
         }

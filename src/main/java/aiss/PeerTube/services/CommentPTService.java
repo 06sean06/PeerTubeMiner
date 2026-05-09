@@ -31,18 +31,19 @@ public class CommentPTService {
     // GET https://peertube3.cpy.re/api/v1/videos/{id}/comment-threads
     @SuppressWarnings("null")
     public List<CommentBasePT> getCommentsByVideo(String videoId, Integer maxComments) {
-        int limit = (maxComments != null) ? maxComments : defaultMaxComments;
-        String uri = url + "/videos/" + videoId + "/comment-threads?count=" + limit;
+        String uri = url + "/videos/" + videoId + "/comment-threads";
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Void> request = new HttpEntity<>(headers);
-
         ResponseEntity<CommentPTResponse> response = restTemplate.exchange(uri, HttpMethod.GET, request, CommentPTResponse.class);
         CommentPTResponse body = response.getBody();
         if (body == null || body.getData() == null) {
             return List.of();
         }
-        return body.getData();
-    }
+        List<CommentBasePT> allComments = body.getData();
+        int limit = (maxComments != null) ? maxComments : defaultMaxComments;
+    return allComments.stream().limit(limit).toList();
+}
+
 
     // Dado un idVideo y un idComment, te devuelve el comentario de ese video en específico. 
     // GET https://peertube3.cpy.re/api/v1/videos/{id}/comment-threads/{threadId}
